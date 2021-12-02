@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="FULL_LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} %5p [%15.15t] %m%n%ex
+        </Property>
+		<Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss} %5p %m%n%ex
+        </Property>
+    </Properties>
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+		<RollingFile name="ldifcompare" fileName="logs/ldifcompare.log" 
+				filePattern="logs/ldifcompare.log.%i">
+			<PatternLayout>
+				<Pattern>${LOG_PATTERN}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10"/>
+		</RollingFile>
+		<RollingFile name="ldifreader" fileName="logs/ldifreader.log" 
+				filePattern="logs/ldifreader.log.%i">
+			<PatternLayout>
+				<Pattern>${LOG_PATTERN}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10"/>
+		</RollingFile>
+		<RollingFile name="newerentities" fileName="logs/newerentities.log" 
+				filePattern="logs/newerentities.log.%i">
+			<PatternLayout>
+				<Pattern>${LOG_PATTERN}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10"/>
+		</RollingFile>
+		<RollingFile name="missingentities" fileName="logs/missingentities.log" 
+				filePattern="logs/missingentities.log.%i">
+			<PatternLayout>
+				<Pattern>${LOG_PATTERN}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10"/>
+		</RollingFile>
+		<RollingFile name="md5differences" fileName="logs/md5differences.log" 
+				filePattern="logs/md5differences.log.%i">
+			<PatternLayout>
+				<Pattern>${LOG_PATTERN}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10"/>
+		</RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="ldifcompare" level="info" additivity="false">
+            <AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="ldifcompare" />
+        </Logger>
+		<Logger name="ldifreader" level="info" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="ldifreader" />
+        </Logger>
+		<Logger name="newerentities" level="info" additivity="false">
+			<AppenderRef ref="newerentities" />
+        </Logger>
+		<Logger name="missingentities" level="info" additivity="false">
+			<AppenderRef ref="missingentities" />
+        </Logger>
+		<Logger name="md5differences" level="info" additivity="false">
+			<AppenderRef ref="md5differences" />
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="ConsoleAppender" />
+        </Root>
+    </Loggers>
+</Configuration>

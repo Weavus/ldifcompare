@@ -19,7 +19,7 @@ public class Entity
 		this.dn = dn;
 		this.timestamp = timestamp;
 		this.md5 = md5;
-		this.files = new ArrayList<File>();
+		this.files = new ArrayList<>();
 		files.add(file);
 	}
 

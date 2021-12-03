@@ -20,9 +20,7 @@ public class LDAPEntities
     
     public boolean hasEntity(String dn)
     {
-    	if ( this.entities.containsKey(dn) )
-    		return true;
-    	return false;
+    	return this.entities.containsKey(dn);
     }
     
     public Entity updateEntity(String dn, Date date, File file)
@@ -47,29 +45,23 @@ public class LDAPEntities
     
     public boolean isEntityNewer(String dn, Date date)
     {
-    	if ( this.entities.containsKey(dn) && ( entities.get(dn).getTimestamp() == null || entities.get(dn).getTimestamp().before(date) ) ) 
-    		return true;
-    	return false;
+    	return ( this.entities.containsKey(dn) && ( entities.get(dn).getTimestamp() == null || entities.get(dn).getTimestamp().before(date) ) ); 
     }
     
 	public boolean isEntityOlder(String dn, Date date)
     {
-    	if ( this.entities.containsKey(dn) && ( entities.get(dn).getTimestamp() == null || entities.get(dn).getTimestamp().after(date) ) ) 
-    		return true;
-    	return false;
+    	return ( this.entities.containsKey(dn) && ( entities.get(dn).getTimestamp() == null || entities.get(dn).getTimestamp().after(date) ) );
     }
 
     public boolean isEntitySame(String dn, Date date)
     {
-    	if ( this.entities.containsKey(dn) && entities.get(dn).getTimestamp() != null && entities.get(dn).getTimestamp().equals(date) ) 
-    		return true;
-    	return false;
+    	return ( this.entities.containsKey(dn) && entities.get(dn).getTimestamp() != null && entities.get(dn).getTimestamp().equals(date) ); 
     }
     
 	public LDAPEntities() 
 	{
 		super();
-		this.entities = new HashMap<String,Entity>();
+		this.entities = new HashMap<>();
 	}
 	
 	public int getSize()

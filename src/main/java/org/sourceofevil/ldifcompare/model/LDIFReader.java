@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.text.NumberFormat;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.time.DurationFormatUtils;
@@ -101,10 +102,10 @@ public class LDIFReader implements Runnable
 				if ( file.getName().endsWith(".gz") || file.getName().endsWith(".gzip") ) 
 				{	
 					gis = new GZIPInputStream(fis);
-					isr = new InputStreamReader(gis, "utf-8");
+					isr = new InputStreamReader(gis, StandardCharsets.UTF_8);
 				}
 				else
-					isr = new InputStreamReader(fis, "utf-8");
+					isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
 
 				reader = new BufferedReader(isr);
 				
